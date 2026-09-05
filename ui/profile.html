@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人中心 · 墨香斋小说租赁</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="brand"><span class="logo-icon">📚</span><div class="brand-name">墨香斋</div><div class="brand-sub">小说租赁系统</div></div>
+    <nav>
+      <div class="nav-group-title">工作台</div>
+      <a href="index.html" class="nav-link"><span class="icon">🏠</span><span>仪表盘</span></a>
+      <a href="books.html" class="nav-link"><span class="icon">📖</span><span>图书管理</span></a>
+      <a href="borrow-new.html" class="nav-link"><span class="icon">➕</span><span>办理借阅</span></a>
+      <a href="return-new.html" class="nav-link"><span class="icon">↩️</span><span>办理归还</span></a>
+      <div class="nav-group-title">记录</div>
+      <a href="borrows.html" class="nav-link"><span class="icon">📋</span><span>借阅记录</span></a>
+      <a href="overdue.html" class="nav-link"><span class="icon">⚠️</span><span>逾期管理</span></a>
+      <div class="nav-group-title">系统</div>
+      <a href="users.html" class="nav-link"><span class="icon">👥</span><span>用户管理</span></a>
+      <a href="profile.html" class="nav-link active"><span class="icon">👤</span><span>个人中心</span></a>
+    </nav>
+    <div class="user-info"><div class="avatar">墨</div><div class="who"><span>墨守成规</span><small>系统管理员</small></div></div>
+  </aside>
+
+  <div class="main">
+    <header class="header">
+      <div class="breadcrumb"><span>首页</span><span class="sep">/</span><strong>个人中心</strong></div>
+    </header>
+
+    <main class="content">
+      <div style="display:grid; grid-template-columns:1fr 2fr; gap:20px;">
+
+        <!-- 个人信息卡 -->
+        <div class="card" style="text-align:center;">
+          <div style="width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg,#2d4a3e,#b8975a); color:#fff; font-size:32px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-family:'STSong',serif;">墨</div>
+          <h2 style="font-family:'STSong',serif; margin-bottom:6px;">墨守成规</h2>
+          <span class="tag tag-info">系统管理员</span>
+          <div style="margin-top:20px; font-size:13px; color:var(--text-secondary); line-height:1.8;">
+            <div>📧 admin@moxiang.com</div>
+            <div>📱 138****0001</div>
+            <div>📅 注册于 2025-12-01</div>
+          </div>
+          <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--border-light);">
+            <div style="font-size:24px; font-weight:bold; color:var(--color-primary); font-family:'STSong',serif;">128</div>
+            <div style="font-size:12px; color:var(--text-muted); letter-spacing:1px;">累计借阅次数</div>
+          </div>
+        </div>
+
+        <div>
+          <!-- AI 推荐 -->
+          <div class="card" style="background:linear-gradient(135deg, #2d4a3e, #1f3529); color:#e8e4da; border:none; margin-bottom:20px;">
+            <div style="font-family:'STSong',serif; font-size:15px; margin-bottom:14px;">✦ AI 为你推荐</div>
+            <div style="font-size:13px; line-height:1.9;">
+              <div>根据你的借阅历史，最近喜欢 <strong style="color:#d4b47a;">武侠、悬疑</strong>。</div>
+              <div style="margin-top:10px; background:rgba(255,255,255,0.06); padding:12px 16px; border-radius:6px;">
+                🔥 <strong style="color:#fff;">《昆仑》· 凤歌</strong><br>
+                <span style="opacity:0.8;">新武侠扛鼎之作，融合历史与玄幻。</span>
+              </div>
+              <div style="margin-top:8px; background:rgba(255,255,255,0.06); padding:12px 16px; border-radius:6px;">
+                🔍 <strong style="color:#fff;">《沉默的真相》· 紫金陈</strong><br>
+                <span style="opacity:0.8;">国产社会派推理巅峰之作，三线并行的张力。</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 当前借阅 -->
+          <div class="card">
+            <div class="card-header"><div class="card-title">我的借阅</div></div>
+            <table class="data-table">
+              <thead><tr><th>书名</th><th>借出日期</th><th>应还日期</th><th>状态</th></tr></thead>
+              <tbody>
+                <tr><td>笑傲江湖</td><td>2026-09-01</td><td>2026-09-15</td><td><span class="tag tag-warning">借阅中</span></td></tr>
+                <tr><td>三体</td><td>2026-09-02</td><td>2026-09-16</td><td><span class="tag tag-warning">借阅中</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="js/app.js"></script>
+<script>
+(function () {
+  // 显示当前登录用户
+  var user = null;
+  try { user = JSON.parse(localStorage.getItem('moxiang_user') || 'null'); } catch (e) {}
+  if (user && user.username) {
+    document.getElementById('pfName').textContent = user.username;
+    document.getElementById('pfAvatar').textContent = user.username.charAt(0).toUpperCase();
+  }
+
+  // AI 推荐轮换
+  var recSets = [
+    [
+      { icon: '🔥', title: '《昆仑》· 凤歌', desc: '新武侠扛鼎之作，融合历史与玄幻。' },
+      { icon: '🔍', title: '《沉默的真相》· 紫金陈', desc: '国产社会派推理巅峰之作，三线并行的张力。' }
+    ],
+    [
+      { icon: '🚀', title: '《三体》· 刘慈欣', desc: '雨果奖之作，中国科幻的里程碑。' },
+      { icon: '🏮', title: '《琅琊榜》· 海宴', desc: '权谋与情义的巅峰之作，机关算尽正人心。' }
+    ],
+    [
+      { icon: '🌊', title: '《白鹿原》· 陈忠实', desc: '一部厚重的家族史诗，渭河平原五十年的风云变幻。' },
+      { icon: '🎭', title: '《许三观卖血记》· 余华', desc: '以黑色幽默书写小人物的生存韧劲。' }
+    ]
+  ];
+  var recIndex = 0;
+
+  function renderRecs() {
+    var set = recSets[recIndex % recSets.length];
+    var html = '';
+    set.forEach(function (r) {
+      html +=
+        '<div style="margin-top:10px; background:rgba(255,255,255,0.06); padding:12px 16px; border-radius:6px;">' +
+        r.icon + ' <strong style="color:#fff;">' + r.title + '</strong><br>' +
+        '<span style="opacity:0.8;">' + r.desc + '</span>' +
+        '</div>';
+    });
+    document.getElementById('pfRecList').innerHTML = html;
+  }
+
+  renderRecs();
+
+  document.getElementById('pfMoreRecs').addEventListener('click', function () {
+    recIndex++;
+    renderRecs();
+    showToast('已为你换一批 AI 推荐', 'info');
+  });
+})();
+</script>
+</body>
+</html>

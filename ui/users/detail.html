@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户详情 · 墨香斋小说租赁</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="brand"><span class="logo-icon">📚</span><div class="brand-name">墨香斋</div><div class="brand-sub">小说租赁系统</div></div>
+    <nav>
+      <div class="nav-group-title">工作台</div>
+      <a href="../index.html" class="nav-link"><span class="icon">🏠</span><span>仪表盘</span></a>
+      <a href="../books.html" class="nav-link"><span class="icon">📖</span><span>图书管理</span></a>
+      <a href="../borrow-new.html" class="nav-link"><span class="icon">➕</span><span>办理借阅</span></a>
+      <a href="../return-new.html" class="nav-link"><span class="icon">↩️</span><span>办理归还</span></a>
+      <div class="nav-group-title">记录</div>
+      <a href="../borrows.html" class="nav-link"><span class="icon">📋</span><span>借阅记录</span></a>
+      <a href="../overdue.html" class="nav-link"><span class="icon">⚠️</span><span>逾期管理</span></a>
+      <div class="nav-group-title">系统</div>
+      <a href="../users.html" class="nav-link active"><span class="icon">👥</span><span>用户管理</span></a>
+      <a href="../profile.html" class="nav-link"><span class="icon">👤</span><span>个人中心</span></a>
+    </nav>
+    <div class="user-info"><div class="avatar">墨</div><div class="who"><span>墨守成规</span><small>系统管理员</small></div></div>
+  </aside>
+
+  <div class="main">
+    <header class="header">
+      <div class="breadcrumb"><a href="../users.html" style="color:#3e6b8a;text-decoration:none;">用户管理</a><span class="sep">/</span><strong>王小明</strong></div>
+    </header>
+
+    <main class="content">
+      <div style="display:grid; grid-template-columns:1fr 2fr; gap:20px;">
+
+        <!-- 左侧：用户信息 -->
+        <div class="card" style="text-align:center;">
+          <div style="width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg,#4a6b5c,#b8975a); color:#fff; font-size:32px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">王</div>
+          <h2 style="font-family:'STSong',serif;">王小明</h2>
+          <span class="tag tag-muted">普通用户</span>
+          <div style="margin-top:20px; font-size:13px; color:var(--text-secondary); line-height:2;">
+            <div>📱 139****2345</div>
+            <div>📧 wangxm@qq.com</div>
+            <div>📅 注册于 2026-01-15</div>
+            <div>📍 书架位置 —</div>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:20px; padding-top:16px; border-top:1px solid var(--border-light);">
+            <button class="btn btn-secondary btn-sm">🔧 编辑信息</button>
+            <button class="btn btn-secondary btn-sm">🔑 重置密码</button>
+          </div>
+          <div style="margin-top:10px;">
+            <button class="btn btn-danger btn-sm">🚫 冻结账号</button>
+          </div>
+        </div>
+
+        <!-- 右侧：借阅记录 -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">借阅记录</div>
+            <div style="display:flex; gap:16px; font-size:12px; color:var(--text-muted);">
+              <span>累计 23 次</span>
+              <span>当前借阅 <strong style="color:var(--color-warning);">3 本</strong></span>
+              <span>未缴费用 <strong style="color:var(--color-danger);">¥ 0.75</strong></span>
+            </div>
+          </div>
+
+          <!-- 当前借阅 -->
+          <div style="margin-bottom:20px;">
+            <div style="font-size:13px; color:var(--text-secondary); margin-bottom:10px; font-weight:600;">📚 当前借阅（3）</div>
+            <table class="data-table">
+              <thead><tr><th>书名</th><th>借出日期</th><th>应还日期</th><th>剩余/逾期</th></tr></thead>
+              <tbody>
+                <tr><td>笑傲江湖</td><td>2026-09-01</td><td>2026-09-15</td><td><span class="tag tag-warning">到期 11 天</span></td></tr>
+                <tr><td>三体</td><td>2026-09-02</td><td>2026-09-16</td><td><span class="tag tag-warning">到期 12 天</span></td></tr>
+                <tr><td>笑傲江湖（逾期）</td><td>2026-08-31</td><td>2026-09-04</td><td><span class="tag tag-danger">已逾期 1 天</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 历史借阅 -->
+          <div>
+            <div style="font-size:13px; color:var(--text-secondary); margin-bottom:10px; font-weight:600;">📖 历史借阅（20）</div>
+            <table class="data-table">
+              <thead><tr><th>书名</th><th>借出日期</th><th>归还日期</th><th>状态</th></tr></thead>
+              <tbody>
+                <tr><td>琅琊榜</td><td>2026-08-01</td><td>2026-08-16</td><td><span class="tag tag-success">已归还</span></td></tr>
+                <tr><td>白夜行</td><td>2026-07-15</td><td>2026-07-29</td><td><span class="tag tag-success">已归还</span></td></tr>
+                <tr><td>围城</td><td>2026-06-20</td><td>2026-07-04</td><td><span class="tag tag-success">已归还</span></td></tr>
+                <tr><td>平凡的世界</td><td>2026-05-10</td><td>2026-05-25</td><td><span class="tag tag-info">已归还（逾期 2 天）</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="../js/app.js"></script>
+</body>
+</html>

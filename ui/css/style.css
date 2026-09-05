@@ -1,0 +1,921 @@
+/* ========================================
+   小说租赁管理系统 — UI Stylesheet
+   风格：书店墨绿 + 书页米白 + 烫金点缀
+   ======================================== */
+
+:root {
+  /* 主色 — 墨绿书脊 */
+  --color-primary: #2d4a3e;
+  --color-primary-dark: #1f3529;
+  --color-primary-light: #4a6b5c;
+  --color-primary-bg: #f4f0e8;
+
+  /* 书页米白 */
+  --color-paper: #faf8f3;
+  --color-paper-dark: #ede6d6;
+
+  /* 烫金点缀 */
+  --color-gold: #b8975a;
+  --color-gold-light: #d4b47a;
+
+  /* 功能色 */
+  --color-success: #4a7c59;
+  --color-warning: #c9a227;
+  --color-danger: #a8442a;
+  --color-info: #3e6b8a;
+
+  /* 文字 */
+  --text-primary: #2a2a2a;
+  --text-secondary: #6b6b6b;
+  --text-muted: #9a9a9a;
+
+  /* 中性 */
+  --white: #ffffff;
+  --border: #e0dacb;
+  --border-light: #eee8da;
+
+  /* 分类色（书脊色带） */
+  --cat-wuxia: #8b4513;      /* 武侠 — 深棕 */
+  --cat-yanqing: #c77c8a;    /* 言情 — 玫粉 */
+  --cat-kehuan: #4a6fa5;     /* 科幻 — 深蓝 */
+  --cat-xuanyi: #5a5a5a;     /* 悬疑 — 深灰 */
+  --cat-lishi: #a0823d;      /* 历史 — 古金 */
+  --cat-qita: #7b8e6e;       /* 其他 — 草绿 */
+
+  /* 布局 */
+  --sidebar-width: 220px;
+  --header-height: 56px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  background: var(--color-paper);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 14px;
+  min-height: 100vh;
+}
+
+/* ========== 布局 ========== */
+
+.layout { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--color-primary-dark);
+  color: #c8d4cc;
+  padding: 24px 0;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .brand {
+  padding: 0 24px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 16px;
+}
+
+.sidebar .brand .logo-icon {
+  font-size: 28px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.sidebar .brand .brand-name {
+  font-family: "STSong", "SimSun", "Georgia", serif;
+  font-size: 17px;
+  color: var(--white);
+  letter-spacing: 2px;
+}
+
+.sidebar .brand .brand-sub {
+  font-size: 11px;
+  color: var(--color-gold-light);
+  margin-top: 4px;
+  letter-spacing: 3px;
+}
+
+.sidebar nav { flex: 1; }
+
+.sidebar .nav-group-title {
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  padding: 16px 24px 6px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.sidebar .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 24px;
+  color: #b0beb5;
+  text-decoration: none;
+  font-size: 14px;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.sidebar .nav-link:hover {
+  background: rgba(255,255,255,0.05);
+  color: var(--white);
+}
+
+.sidebar .nav-link.active {
+  background: rgba(255,255,255,0.08);
+  color: var(--white);
+  border-left-color: var(--color-gold);
+}
+
+.sidebar .nav-link .icon { font-size: 16px; width: 20px; text-align: center; }
+
+.sidebar .user-info {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar .user-info .avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.sidebar .user-info .who {
+  font-size: 13px;
+  color: var(--white);
+}
+
+.sidebar .user-info .who small {
+  display: block;
+  font-size: 11px;
+  color: var(--color-gold-light);
+}
+
+/* ========== 主内容区 ========== */
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.header {
+  height: var(--header-height);
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header .breadcrumb {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.header .breadcrumb strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.header .breadcrumb .sep {
+  color: var(--text-muted);
+  margin: 0 8px;
+}
+
+.header .header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.content {
+  flex: 1;
+  padding: 28px;
+  overflow-y: auto;
+}
+
+/* ========== 卡片 ========== */
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+}
+
+.card + .card { margin-top: 20px; }
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.card-title {
+  font-family: "STSong", "SimSun", "Georgia", serif;
+  font-size: 16px;
+  color: var(--text-primary);
+  letter-spacing: 1px;
+}
+
+.card-title::before {
+  content: "";
+  display: inline-block;
+  width: 3px; height: 14px;
+  background: var(--color-primary);
+  margin-right: 10px;
+  vertical-align: -2px;
+  border-radius: 2px;
+}
+
+/* ========== 仪表盘 ========== */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  border-left: 4px solid var(--color-primary);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card .stat-icon {
+  position: absolute;
+  right: 20px; top: 20px;
+  font-size: 32px;
+  opacity: 0.12;
+}
+
+.stat-card .stat-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.stat-card .stat-value {
+  font-family: "STSong", "Georgia", serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--color-primary);
+  margin-top: 8px;
+}
+
+.stat-card .stat-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.stat-card.warn { border-left-color: var(--color-warning); }
+.stat-card.warn .stat-value { color: var(--color-warning); }
+.stat-card.danger { border-left-color: var(--color-danger); }
+.stat-card.danger .stat-value { color: var(--color-danger); }
+.stat-card.gold { border-left-color: var(--color-gold); }
+.stat-card.gold .stat-value { color: var(--color-gold); }
+
+/* ========== 书籍卡片网格 ========== */
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+.book-card {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--border-light);
+}
+
+.book-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.book-cover {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  text-align: center;
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.book-cover::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 6px;
+  background: rgba(0,0,0,0.25);
+}
+
+.book-cover .bc-title {
+  font-family: "STSong", "SimSun", serif;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1.4;
+  margin-bottom: 6px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.book-cover .bc-author {
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.book-info {
+  padding: 12px 14px;
+}
+
+.book-info .bi-status {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.book-info .bi-status.available { background: rgba(74,124,89,0.1); color: var(--color-success); }
+.book-info .bi-status.borrowed { background: rgba(201,162,39,0.12); color: #9a7a10; }
+.book-info .bi-status.repairing { background: rgba(90,90,90,0.1); color: var(--text-secondary); }
+
+.book-info .bi-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* 分类色 */
+.cat-wuxia { background: linear-gradient(135deg, #a0522d, #6b3410); }
+.cat-yanqing { background: linear-gradient(135deg, #d48494, #a04c5c); }
+.cat-kehuan { background: linear-gradient(135deg, #5a84c2, #2e4d7a); }
+.cat-xuanyi { background: linear-gradient(135deg, #6b6b6b, #3a3a3a); }
+.cat-lishi { background: linear-gradient(135deg, #bf9f5a, #7a6432); }
+.cat-qita { background: linear-gradient(135deg, #8ea580, #4e6044); }
+
+/* ========== 表格 ========== */
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table thead th {
+  text-align: left;
+  padding: 12px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: var(--color-paper);
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table tbody td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 14px;
+}
+
+.data-table tbody tr:hover {
+  background: rgba(45,74,62,0.03);
+}
+
+.data-table .cat-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: var(--white);
+}
+
+/* ========== 状态标签 ========== */
+
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.tag-success { background: rgba(74,124,89,0.12); color: var(--color-success); }
+.tag-warning { background: rgba(201,162,39,0.12); color: #9a7a10; }
+.tag-danger { background: rgba(168,68,42,0.1); color: var(--color-danger); }
+.tag-info { background: rgba(62,107,138,0.1); color: var(--color-info); }
+.tag-muted { background: rgba(0,0,0,0.06); color: var(--text-secondary); }
+
+/* ========== 按钮 ========== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  background: var(--color-primary);
+  color: var(--white);
+}
+
+.btn:hover { background: var(--color-primary-dark); }
+
+.btn-secondary {
+  background: var(--color-paper-dark);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover { background: #e4ddcb; }
+
+.btn-danger { background: var(--color-danger); }
+.btn-danger:hover { background: #8a3520; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-primary);
+  padding: 6px 10px;
+}
+.btn-ghost:hover { background: rgba(45,74,62,0.08); }
+
+.btn-gold {
+  background: var(--color-gold);
+  color: var(--white);
+}
+.btn-gold:hover { background: #9a7f47; }
+
+.btn-sm { padding: 6px 12px; font-size: 12px; }
+.btn-lg { padding: 12px 28px; font-size: 15px; }
+
+/* ========== 表单 ========== */
+
+.form-group { margin-bottom: 18px; }
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.form-group label .req { color: var(--color-danger); margin-left: 2px; }
+
+.form-control {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--white);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(45,74,62,0.1);
+}
+
+.form-control::placeholder { color: var(--text-muted); }
+
+select.form-control { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 34px; }
+
+textarea.form-control { resize: vertical; min-height: 80px; }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.form-row-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
+}
+
+/* ========== 搜索栏 ========== */
+
+.search-bar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-bar .form-control {
+  width: auto;
+  flex: 1;
+  min-width: 200px;
+}
+
+/* ========== Toast ========== */
+
+#toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.toast {
+  padding: 12px 22px;
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  margin-bottom: 8px;
+  font-size: 14px;
+  box-shadow: var(--shadow-md);
+  animation: slideIn 0.25s ease-out;
+}
+
+.toast.success { background: var(--color-success); }
+.toast.error { background: var(--color-danger); }
+.toast.info { background: var(--color-info); }
+.toast.warning { background: var(--color-warning); }
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ========== 登录页 ========== */
+
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2d4a3e 0%, #1f3529 100%);
+  padding: 20px;
+}
+
+.auth-card {
+  background: var(--color-paper);
+  border-radius: var(--radius-lg);
+  padding: 44px 48px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.auth-card .ac-brand {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.auth-card .ac-brand .ac-logo {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.auth-card .ac-brand .ac-name {
+  font-family: "STSong", "SimSun", serif;
+  font-size: 22px;
+  color: var(--color-primary-dark);
+  letter-spacing: 3px;
+}
+
+.auth-card .ac-brand .ac-sub {
+  font-size: 12px;
+  color: var(--color-gold);
+  letter-spacing: 4px;
+  margin-top: 6px;
+}
+
+/* ========== 费用明细 ========== */
+
+.summary-box {
+  background: var(--color-paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-top: 16px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+.summary-row.total {
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+  padding-top: 14px;
+  font-weight: bold;
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.summary-row .amount { font-family: "STSong", serif; }
+.summary-row.overdue .amount { color: var(--color-danger); }
+.summary-row.damage .amount { color: var(--color-warning); }
+
+/* ========== 空状态 ========== */
+
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+
+.empty .empty-icon { font-size: 48px; margin-bottom: 12px; opacity: 0.3; }
+.empty .empty-text { font-size: 14px; }
+
+/* ========== 响应式 ========== */
+
+@media (max-width: 1024px) {
+  .sidebar { width: 64px; padding: 20px 0; }
+  .sidebar .brand .brand-name,
+  .sidebar .brand .brand-sub,
+  .sidebar .nav-group-title,
+  .sidebar .nav-link span:not(.icon),
+  .sidebar .user-info .who span { display: none; }
+  .sidebar .nav-link { justify-content: center; padding: 12px; }
+  .content { padding: 20px; }
+  .form-row, .form-row-3 { grid-template-columns: 1fr; }
+}
+
+/* ========== Auth 分屏布局 ========== */
+
+.auth-split { display: flex; min-height: 100vh; }
+
+.auth-brand {
+  flex: 1;
+  background: linear-gradient(150deg, #2d4a3e 0%, #1f3529 55%, #16281f 100%);
+  color: #e8e4da;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-brand .ab-logo { font-size: 52px; }
+
+.auth-brand .ab-name {
+  font-family: "STSong", "SimSun", serif;
+  font-size: 38px;
+  letter-spacing: 10px;
+  color: #fff;
+  margin: 18px 0 10px;
+}
+
+.auth-brand .ab-sub {
+  font-size: 13px;
+  letter-spacing: 7px;
+  color: var(--color-gold-light);
+}
+
+.auth-brand .ab-slogan {
+  margin-top: 44px;
+  font-size: 15px;
+  line-height: 2.2;
+  opacity: 0.82;
+  max-width: 420px;
+}
+
+.auth-brand .ab-slogan em {
+  font-style: normal;
+  color: var(--color-gold-light);
+}
+
+.auth-brand .ab-deco {
+  position: absolute;
+  font-size: 260px;
+  opacity: 0.05;
+  right: -50px;
+  bottom: -70px;
+  transform: rotate(-12deg);
+  user-select: none;
+}
+
+.auth-form-side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-paper);
+  padding: 40px;
+}
+
+.auth-form-box { width: 100%; max-width: 400px; }
+
+.auth-form-box .af-title {
+  font-family: "STSong", serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+
+.auth-form-box .af-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 6px 0 28px;
+}
+
+.auth-form-box .af-demo {
+  background: rgba(184,151,90,0.1);
+  border: 1px dashed var(--color-gold);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #9a7f47;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+  .auth-brand { display: none; }
+}
+
+/* ========== 表单错误态 ========== */
+
+.error-msg {
+  display: none;
+  font-size: 12px;
+  color: var(--color-danger);
+  margin-top: 5px;
+}
+
+.form-group.has-error .form-control {
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 3px rgba(168,68,42,0.08);
+}
+
+.form-group.has-error .error-msg { display: block; }
+
+/* ========== 密码可见切换 ========== */
+
+.input-wrap { position: relative; }
+
+.input-wrap .toggle-pwd {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 15px;
+  color: var(--text-muted);
+  padding: 2px;
+}
+
+.input-wrap .form-control { padding-right: 40px; }
+
+/* ========== 用户下拉菜单 ========== */
+
+.user-menu-wrap { position: relative; }
+
+.user-dropdown {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 16px;
+  right: 16px;
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-light);
+  padding: 6px;
+  display: none;
+  z-index: 100;
+}
+
+.user-dropdown.show { display: block; }
+
+.user-dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.user-dropdown a:hover { background: var(--color-paper); }
+.user-dropdown a.danger { color: var(--color-danger); }
+
+/* ========== 弹窗 ========== */
+
+.modal-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 30, 25, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-mask.show { display: flex; }
+
+.modal {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  width: 100%;
+  max-width: 480px;
+  box-shadow: var(--shadow-lg);
+  animation: pop 0.18s ease-out;
+}
+
+@keyframes pop {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-head {
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title { font-family: "STSong", serif; font-size: 16px; }
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.modal-close:hover { color: var(--text-primary); }
+
+.modal-body { padding: 22px; }
+.modal-body .modal-text { font-size: 14px; color: var(--text-primary); line-height: 1.7; }
+
+.modal-foot {
+  padding: 14px 22px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}

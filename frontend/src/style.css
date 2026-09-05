@@ -1,0 +1,42 @@
+/* 全局基础样式 — 墨香斋小说租赁（配色沿用 UI 原型：墨绿 / 米白 / 金棕） */
+:root {
+  --mo-green: #2d4a3e;
+  --mo-green-dark: #1f3529;
+  --mo-cream: #f6f4ee;
+  --mo-gold: #b8975a;
+  --mo-gold-light: #d4b47a;
+  --mo-danger: #a8442a;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+  background: var(--mo-cream);
+}
+
+.page-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.page-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.page-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 16px;
+}
+
+.gold-btn { --el-button-bg-color: var(--mo-gold); --el-button-border-color: var(--mo-gold); --el-button-hover-bg-color: #c8a86b; --el-button-hover-border-color: #c8a86b; }

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>逾期管理 · 墨香斋小说租赁</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="brand"><span class="logo-icon">📚</span><div class="brand-name">墨香斋</div><div class="brand-sub">小说租赁系统</div></div>
+    <nav>
+      <div class="nav-group-title">工作台</div>
+      <a href="index.html" class="nav-link"><span class="icon">🏠</span><span>仪表盘</span></a>
+      <a href="books.html" class="nav-link"><span class="icon">📖</span><span>图书管理</span></a>
+      <a href="borrow-new.html" class="nav-link"><span class="icon">➕</span><span>办理借阅</span></a>
+      <a href="return-new.html" class="nav-link"><span class="icon">↩️</span><span>办理归还</span></a>
+      <div class="nav-group-title">记录</div>
+      <a href="borrows.html" class="nav-link"><span class="icon">📋</span><span>借阅记录</span></a>
+      <a href="overdue.html" class="nav-link active"><span class="icon">⚠️</span><span>逾期管理</span></a>
+      <div class="nav-group-title">系统</div>
+      <a href="users.html" class="nav-link"><span class="icon">👥</span><span>用户管理</span></a>
+      <a href="profile.html" class="nav-link"><span class="icon">👤</span><span>个人中心</span></a>
+    </nav>
+    <div class="user-info"><div class="avatar">墨</div><div class="who"><span>墨守成规</span><small>系统管理员</small></div></div>
+  </aside>
+
+  <div class="main">
+    <header class="header">
+      <div class="breadcrumb"><span>首页</span><span class="sep">/</span><strong>逾期管理</strong></div>
+      <div class="header-actions">
+        <button class="btn btn-gold">🤖 AI 批量提醒</button>
+      </div>
+    </header>
+
+    <main class="content">
+      <!-- 逾期统计 -->
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px;">
+        <div class="stat-card danger"><span class="stat-icon">⚠️</span><div class="stat-label">逾期总数</div><div class="stat-value">18</div></div>
+        <div class="stat-card warn"><span class="stat-icon">📅</span><div class="stat-label">1-3 天</div><div class="stat-value">12</div></div>
+        <div class="stat-card warn"><span class="stat-icon">📅</span><div class="stat-label">4-7 天</div><div class="stat-value">4</div></div>
+        <div class="stat-card"><span class="stat-icon">🔥</span><div class="stat-label">7 天以上</div><div class="stat-value">2</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">逾期详情</div>
+          <div style="display:flex; gap:8px;">
+            <select class="form-control" id="rangeFilter" style="min-width:130px; padding:6px 12px;">
+              <option value="">全部逾期</option><option value="1-3">1-3 天</option><option value="4-7">4-7 天</option><option value="7+">7 天以上</option>
+            </select>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>借阅人</th><th>联系方式</th><th>书名</th><th>应还日期</th><th>逾期天数</th><th>预估罚款</th><th>操作</th></tr>
+          </thead>
+          <tbody id="overdueBody">
+            <tr>
+              <td><strong>王小明</strong></td><td>139****2345</td>
+              <td>笑傲江湖</td><td>2026-09-04</td>
+              <td><span class="tag tag-danger">已逾期 1 天</span></td>
+              <td>¥ 0.75</td>
+              <td><button class="btn btn-secondary btn-sm remind-btn">📨 提醒</button> <a href="return-new.html" class="btn-ghost btn-sm">去归还</a></td>
+            </tr>
+            <tr>
+              <td><strong>李思琪</strong></td><td>137****6789</td>
+              <td>三体</td><td>2026-09-03</td>
+              <td><span class="tag tag-danger">已逾期 2 天</span></td>
+              <td>¥ 1.20</td>
+              <td><button class="btn btn-secondary btn-sm remind-btn">📨 提醒</button> <a href="return-new.html" class="btn-ghost btn-sm">去归还</a></td>
+            </tr>
+            <tr>
+              <td><strong>张大山</strong></td><td>136****1111</td>
+              <td>天龙八部</td><td>2026-08-29</td>
+              <td><span class="tag tag-danger">已逾期 7 天</span></td>
+              <td>¥ 5.25</td>
+              <td><button class="btn btn-secondary btn-sm remind-btn">📨 提醒</button> <a href="return-new.html" class="btn-ghost btn-sm">去归还</a></td>
+            </tr>
+            <tr>
+              <td><strong>陈小雨</strong></td><td>135****2222</td>
+              <td>明朝那些事儿</td><td>2026-08-24</td>
+              <td><span class="tag tag-danger">已逾期 12 天</span></td>
+              <td>¥ 18.00</td>
+              <td><button class="btn btn-secondary btn-sm remind-btn">📨 提醒</button> <a href="return-new.html" class="btn-ghost btn-sm">去归还</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="js/app.js"></script>
+<script>
+(function () {
+  var rows = Array.prototype.slice.call(document.querySelectorAll('#overdueBody tr'));
+
+  // 单行提醒
+  document.querySelectorAll('.remind-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var name = btn.closest('tr').querySelector('td strong').textContent;
+      showToast('📨 已向 ' + name + ' 发送 AI 温馨提醒', 'success');
+    });
+  });
+
+  // AI 批量提醒
+  document.querySelector('.header-actions .btn-gold').addEventListener('click', function () {
+    var n = rows.filter(function (r) { return r.style.display !== 'none'; }).length;
+    showToast('🤖 已批量发送 ' + n + ' 条 AI 逾期提醒文案', 'success', 3000);
+  });
+
+  // 逾期档位筛选
+  document.getElementById('rangeFilter').addEventListener('change', function () {
+    var range = this.value;
+    rows.forEach(function (row) {
+      var days = parseInt(row.querySelector('.tag-danger').textContent.replace(/\D/g, ''), 10);
+      var show;
+      if (!range) show = true;
+      else if (range === '1-3') show = days <= 3;
+      else if (range === '4-7') show = days >= 4 && days <= 7;
+      else show = days > 7;
+      row.style.display = show ? '' : 'none';
+    });
+  });
+})();
+</script>
+</body>
+</html>

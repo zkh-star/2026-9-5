@@ -11,6 +11,10 @@ venv/
 env/
 .env
 
+# Node
+node_modules/
+*.log
+
 # IDE
 .idea/
 .vscode/

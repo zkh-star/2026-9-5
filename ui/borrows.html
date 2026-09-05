@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>借阅记录 · 墨香斋小说租赁</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="brand"><span class="logo-icon">📚</span><div class="brand-name">墨香斋</div><div class="brand-sub">小说租赁系统</div></div>
+    <nav>
+      <div class="nav-group-title">工作台</div>
+      <a href="index.html" class="nav-link"><span class="icon">🏠</span><span>仪表盘</span></a>
+      <a href="books.html" class="nav-link"><span class="icon">📖</span><span>图书管理</span></a>
+      <a href="borrow-new.html" class="nav-link"><span class="icon">➕</span><span>办理借阅</span></a>
+      <a href="return-new.html" class="nav-link"><span class="icon">↩️</span><span>办理归还</span></a>
+      <div class="nav-group-title">记录</div>
+      <a href="borrows.html" class="nav-link active"><span class="icon">📋</span><span>借阅记录</span></a>
+      <a href="overdue.html" class="nav-link"><span class="icon">⚠️</span><span>逾期管理</span></a>
+      <div class="nav-group-title">系统</div>
+      <a href="users.html" class="nav-link"><span class="icon">👥</span><span>用户管理</span></a>
+      <a href="profile.html" class="nav-link"><span class="icon">👤</span><span>个人中心</span></a>
+    </nav>
+    <div class="user-info"><div class="avatar">墨</div><div class="who"><span>墨守成规</span><small>系统管理员</small></div></div>
+  </aside>
+
+  <div class="main">
+    <header class="header">
+      <div class="breadcrumb"><span>首页</span><span class="sep">/</span><strong>借阅记录</strong></div>
+    </header>
+
+    <main class="content">
+      <div class="search-bar">
+        <input class="form-control" id="searchInput" placeholder="搜索借阅单号、用户名或书名...">
+        <input class="form-control" type="date" style="min-width:160px;" title="借出日期起">
+        <input class="form-control" type="date" style="min-width:160px;" title="借出日期止">
+        <select class="form-control" id="statusFilter" style="min-width:130px;">
+          <option value="">全部状态</option><option value="借阅中">借阅中</option><option value="已归还">已归还</option><option value="逾期中">逾期中</option>
+        </select>
+        <button class="btn btn-secondary" id="btnSearch">搜索</button>
+      </div>
+
+      <div class="card" style="padding:0; overflow:hidden;">
+        <table class="data-table">
+          <thead>
+            <tr><th>借阅单号</th><th>借阅人</th><th>书名</th><th>借出日期</th><th>应还日期</th><th>归还日期</th><th>押金</th><th>状态</th></tr>
+          </thead>
+          <tbody id="borrowsBody">
+            <tr><td>#B-2026-0901</td><td>王小明</td><td>笑傲江湖</td><td>2026-09-01</td><td>2026-09-15</td><td>—</td><td>¥30</td><td><span class="tag tag-warning">借阅中</span></td></tr>
+            <tr><td>#B-2026-0902</td><td>李思琪</td><td>三体</td><td>2026-09-02</td><td>2026-09-16</td><td>—</td><td>¥20</td><td><span class="tag tag-warning">借阅中</span></td></tr>
+            <tr><td>#B-2026-0831</td><td>王小明</td><td>笑傲江湖</td><td>2026-08-31</td><td>2026-09-04</td><td>—</td><td>¥30</td><td><span class="tag tag-danger">逾期中</span></td></tr>
+            <tr><td>#B-2026-0820</td><td>陈小雨</td><td>围城</td><td>2026-08-20</td><td>2026-09-03</td><td>2026-09-02</td><td>¥20</td><td><span class="tag tag-success">已归还</span></td></tr>
+            <tr><td>#B-2026-0815</td><td>张大山</td><td>白夜行</td><td>2026-08-15</td><td>2026-08-29</td><td>2026-08-28</td><td>¥20</td><td><span class="tag tag-success">已归还</span></td></tr>
+            <tr><td>#B-2026-0801</td><td>王小明</td><td>琅琊榜</td><td>2026-08-01</td><td>2026-08-15</td><td>2026-08-16</td><td>¥25</td><td><span class="tag tag-info">已归还（逾期 1 天）</span></td></tr>
+          </tbody>
+        </table>
+        <div class="empty" id="emptyTip" style="display:none;">
+          <div class="empty-icon">🔍</div><div class="empty-text">没有符合条件的借阅记录</div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="js/app.js"></script>
+<script>
+(function () {
+  var searchInput = document.getElementById('searchInput');
+  var statusFilter = document.getElementById('statusFilter');
+  var rows = Array.prototype.slice.call(document.querySelectorAll('#borrowsBody tr'));
+  var emptyTip = document.getElementById('emptyTip');
+
+  function applyFilter() {
+    var kw = searchInput.value.trim().toLowerCase();
+    var st = statusFilter.value;
+    var visible = 0;
+
+    rows.forEach(function (row) {
+      var text = row.textContent.toLowerCase();
+      var status = row.querySelector('.tag').textContent;
+      var show = (!kw || text.indexOf(kw) !== -1) && (!st || status.indexOf(st) !== -1);
+      row.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    emptyTip.style.display = visible === 0 ? '' : 'none';
+  }
+
+  searchInput.addEventListener('input', applyFilter);
+  statusFilter.addEventListener('change', applyFilter);
+  document.getElementById('btnSearch').addEventListener('click', applyFilter);
+})();
+</script>
+</body>
+</html>

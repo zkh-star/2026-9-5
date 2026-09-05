@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>办理借阅 · 墨香斋小说租赁</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="brand"><span class="logo-icon">📚</span><div class="brand-name">墨香斋</div><div class="brand-sub">小说租赁系统</div></div>
+    <nav>
+      <div class="nav-group-title">工作台</div>
+      <a href="index.html" class="nav-link"><span class="icon">🏠</span><span>仪表盘</span></a>
+      <a href="books.html" class="nav-link"><span class="icon">📖</span><span>图书管理</span></a>
+      <a href="borrow-new.html" class="nav-link active"><span class="icon">➕</span><span>办理借阅</span></a>
+      <a href="return-new.html" class="nav-link"><span class="icon">↩️</span><span>办理归还</span></a>
+      <div class="nav-group-title">记录</div>
+      <a href="borrows.html" class="nav-link"><span class="icon">📋</span><span>借阅记录</span></a>
+      <a href="overdue.html" class="nav-link"><span class="icon">⚠️</span><span>逾期管理</span></a>
+      <div class="nav-group-title">系统</div>
+      <a href="users.html" class="nav-link"><span class="icon">👥</span><span>用户管理</span></a>
+      <a href="profile.html" class="nav-link"><span class="icon">👤</span><span>个人中心</span></a>
+    </nav>
+    <div class="user-info"><div class="avatar">墨</div><div class="who"><span>墨守成规</span><small>系统管理员</small></div></div>
+  </aside>
+
+  <div class="main">
+    <header class="header">
+      <div class="breadcrumb"><span>首页</span><span class="sep">/</span><strong>办理借阅</strong></div>
+    </header>
+
+    <main class="content">
+      <div style="display:grid; grid-template-columns:2fr 1fr; gap:20px;">
+        <div class="card">
+          <div class="card-header"><div class="card-title">借阅信息</div></div>
+
+          <div class="form-group">
+            <label>借阅用户<span class="req">*</span></label>
+            <select class="form-control" id="selUser">
+              <option value="">选择用户...</option>
+              <option value="1" data-name="王小明" data-current="3">王小明（ID: 1, 当前借阅 3 本）</option>
+              <option value="2" data-name="李思琪" data-current="1">李思琪（ID: 2, 当前借阅 1 本）</option>
+              <option value="3" data-name="张大山" data-current="0">张大山（ID: 3, 当前借阅 0 本）</option>
+              <option value="4" data-name="陈小雨" data-current="5">陈小雨（ID: 4, 当前借阅 5 本 · 已达上限）</option>
+            </select>
+            <div class="error-msg"></div>
+            <small style="color:var(--text-muted);">每人最多同时借阅 5 本</small>
+          </div>
+
+          <div class="form-group">
+            <label>借阅图书<span class="req">*</span></label>
+            <select class="form-control" id="selBook">
+              <option value="">选择图书...</option>
+              <option value="三体" data-rent="0.40" data-deposit="20" data-stock="2">三体 · 刘慈欣（在库 2 本，¥0.40/天）</option>
+              <option value="白夜行" data-rent="0.40" data-deposit="18" data-stock="1">白夜行 · 东野圭吾（在库 1 本，¥0.40/天）</option>
+              <option value="明朝那些事儿" data-rent="1.00" data-deposit="30" data-stock="3">明朝那些事儿 · 当年明月（在库 3 本，¥1.00/天）</option>
+            </select>
+            <div class="error-msg"></div>
+          </div>
+
+          <div class="form-group">
+            <label>借阅天数<span class="req">*</span></label>
+            <div style="display:flex; gap:12px; align-items:center;">
+              <input class="form-control" id="days" type="number" min="1" max="30" value="15" style="max-width:140px;">
+              <span style="color:var(--text-muted);">最长 30 天</span>
+            </div>
+            <div class="error-msg"></div>
+          </div>
+
+          <div style="display:flex; gap:12px; margin-top:8px; padding-top:20px; border-top:1px solid var(--border-light);">
+            <button class="btn btn-gold btn-lg" id="btnBorrow">📖 确认借阅</button>
+            <button class="btn btn-secondary btn-lg" id="btnReset">重置</button>
+          </div>
+        </div>
+
+        <!-- 费用预览 -->
+        <div class="card" style="border-color:var(--color-gold);">
+          <div class="card-header">
+            <div class="card-title" style="color:var(--color-gold);">费用预览</div>
+          </div>
+          <div class="summary-box" style="border:none; padding:0; background:transparent;">
+            <div class="summary-row"><span>日租金</span><span class="amount" id="pRent">¥ —</span></div>
+            <div class="summary-row"><span>借阅天数</span><span class="amount" id="pDays">— 天</span></div>
+            <div class="summary-row"><span>预计租金</span><span class="amount" id="pFee">¥ —</span></div>
+            <div class="summary-row total"><span>应收押金</span><span class="amount" id="pDeposit">¥ —</span></div>
+          </div>
+          <div style="font-size:12px; color:var(--text-muted); margin-top:16px; padding-top:12px; border-top:1px dashed var(--border);">
+            💡 归还时如无损坏无逾期，押金全额退还
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="js/app.js"></script>
+<script>
+(function () {
+  var selUser = document.getElementById('selUser');
+  var selBook = document.getElementById('selBook');
+  var days = document.getElementById('days');
+  var card = document.querySelector('.content');
+
+  function fmt(n) { return '¥ ' + n.toFixed(2); }
+
+  function refresh() {
+    var rent = parseFloat(selBook.selectedOptions[0] ? selBook.selectedOptions[0].dataset.rent : NaN);
+    var deposit = parseFloat(selBook.selectedOptions[0] ? selBook.selectedOptions[0].dataset.deposit : NaN);
+    var d = parseInt(days.value, 10);
+
+    document.getElementById('pRent').textContent = isNaN(rent) ? '¥ —' : fmt(rent);
+    document.getElementById('pDays').textContent = isNaN(d) ? '— 天' : d + ' 天';
+    document.getElementById('pFee').textContent = (isNaN(rent) || isNaN(d)) ? '¥ —' : fmt(rent * d);
+    document.getElementById('pDeposit').textContent = isNaN(deposit) ? '¥ —' : fmt(deposit);
+  }
+
+  selUser.addEventListener('change', function () { clearFieldError(selUser); });
+  selBook.addEventListener('change', function () { clearFieldError(selBook); refresh(); });
+  days.addEventListener('input', function () { refresh(); });
+  refresh();
+
+  document.getElementById('btnBorrow').addEventListener('click', function () {
+    clearAllErrors(card);
+    var ok = true;
+
+    if (!selUser.value) { setFieldError(selUser, '请选择借阅用户'); ok = false; }
+    if (!selBook.value) { setFieldError(selBook, '请选择借阅图书'); ok = false; }
+
+    var d = parseInt(days.value, 10);
+    if (isNaN(d) || d < 1 || d > 30) { setFieldError(days, '借阅天数需为 1-30 天'); ok = false; }
+
+    if (!ok) { showToast('请先补全借阅信息', 'error'); return; }
+
+    // 借阅上限校验（PRD 规则：每人最多同时借阅 5 本）
+    var current = parseInt(selUser.selectedOptions[0].dataset.current, 10);
+    if (current >= 5) {
+      showToast(selUser.selectedOptions[0].dataset.name + ' 当前已借 5 本，已达借阅上限', 'error', 3200);
+      return;
+    }
+
+    var name = selUser.selectedOptions[0].dataset.name;
+    showToast('借阅成功：《' + selBook.value + '》 → ' + name, 'success');
+    setTimeout(function () { location.href = 'borrows.html'; }, 900);
+  });
+
+  document.getElementById('btnReset').addEventListener('click', function () {
+    selUser.value = '';
+    selBook.value = '';
+    days.value = 15;
+    clearAllErrors(card);
+    refresh();
+    showToast('已重置', 'info');
+  });
+})();
+</script>
+</body>
+</html>

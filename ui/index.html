@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>仪表盘 · 墨香斋小说租赁</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+
+  <!-- 侧边栏 -->
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="logo-icon">📚</span>
+      <div class="brand-name">墨香斋</div>
+      <div class="brand-sub">小说租赁系统</div>
+    </div>
+
+    <nav>
+      <div class="nav-group-title">工作台</div>
+      <a href="index.html" class="nav-link active"><span class="icon">🏠</span><span>仪表盘</span></a>
+      <a href="books.html" class="nav-link"><span class="icon">📖</span><span>图书管理</span></a>
+      <a href="borrow-new.html" class="nav-link"><span class="icon">➕</span><span>办理借阅</span></a>
+      <a href="return-new.html" class="nav-link"><span class="icon">↩️</span><span>办理归还</span></a>
+
+      <div class="nav-group-title">记录</div>
+      <a href="borrows.html" class="nav-link"><span class="icon">📋</span><span>借阅记录</span></a>
+      <a href="overdue.html" class="nav-link"><span class="icon">⚠️</span><span>逾期管理</span></a>
+
+      <div class="nav-group-title">系统</div>
+      <a href="users.html" class="nav-link"><span class="icon">👥</span><span>用户管理</span></a>
+      <a href="profile.html" class="nav-link"><span class="icon">👤</span><span>个人中心</span></a>
+    </nav>
+
+    <div class="user-info">
+      <div class="avatar">墨</div>
+      <div class="who">
+        <span>墨守成规</span>
+        <small>系统管理员</small>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 主内容 -->
+  <div class="main">
+    <header class="header">
+      <div class="breadcrumb">
+        <span>首页</span>
+        <span class="sep">/</span>
+        <strong>仪表盘</strong>
+      </div>
+      <div class="header-actions">
+        <span style="font-size:12px;color:#9a9a9a;">2026 年 9 月 5 日</span>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- 统计卡片 -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-icon">📖</span>
+          <div class="stat-label">馆藏图书</div>
+          <div class="stat-value">1,248</div>
+          <div class="stat-sub">在库 876 本 · 借出 312 本</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">👥</span>
+          <div class="stat-label">注册用户</div>
+          <div class="stat-value">356</div>
+          <div class="stat-sub">本月新增 23 人</div>
+        </div>
+        <div class="stat-card warn">
+          <span class="stat-icon">⚠️</span>
+          <div class="stat-label">逾期未还</div>
+          <div class="stat-value">18</div>
+          <div class="stat-sub">最长逾期 12 天</div>
+        </div>
+        <div class="stat-card gold">
+          <span class="stat-icon">💰</span>
+          <div class="stat-label">本月营收</div>
+          <div class="stat-value">¥ 2,684</div>
+          <div class="stat-sub">逾期罚款 ¥ 328</div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:2fr 1fr; gap:20px;">
+
+        <!-- 热门图书 -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">热门借阅榜</div>
+            <a href="books.html" class="btn-ghost btn-sm">查看全部 →</a>
+          </div>
+          <div class="books-grid" style="grid-template-columns:repeat(4,1fr); gap:14px;">
+            <div class="book-card">
+              <div class="book-cover cat-wuxia"><span class="bc-title">笑傲江湖</span><span class="bc-author">金庸</span></div>
+              <div class="book-info">
+                <span class="bi-status borrowed">借出中</span>
+                <div class="bi-meta"><span>借阅 48 次</span></div>
+              </div>
+            </div>
+            <div class="book-card">
+              <div class="book-cover cat-kehuan"><span class="bc-title">三体</span><span class="bc-author">刘慈欣</span></div>
+              <div class="book-info">
+                <span class="bi-status available">在库</span>
+                <div class="bi-meta"><span>借阅 42 次</span></div>
+              </div>
+            </div>
+            <div class="book-card">
+              <div class="book-cover cat-yanqing"><span class="bc-title">平凡的世界</span><span class="bc-author">路遥</span></div>
+              <div class="book-info">
+                <span class="bi-status borrowed">借出中</span>
+                <div class="bi-meta"><span>借阅 37 次</span></div>
+              </div>
+            </div>
+            <div class="book-card">
+              <div class="book-cover cat-xuanyi"><span class="bc-title">白夜行</span><span class="bc-author">东野圭吾</span></div>
+              <div class="book-info">
+                <span class="bi-status available">在库</span>
+                <div class="bi-meta"><span>借阅 34 次</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI 阅读推荐 -->
+        <div class="card" style="background:linear-gradient(135deg, #2d4a3e, #1f3529); color:#e8e4da; border:none;">
+          <div class="card-header" style="border-color:rgba(255,255,255,0.1);">
+            <div class="card-title" style="color:#d4b47a;">✦ AI 阅读推荐</div>
+          </div>
+          <div style="font-size:13px; line-height:1.8;" id="recList"></div>
+          <button class="btn-gold" style="margin-top:12px; width:100%;" id="btnMoreRecs">换一批推荐</button>
+        </div>
+      </div>
+
+      <!-- 即将到期 + 最近借阅 -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:20px;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">即将到期（7 天内）</div>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>借阅人</th><th>书名</th><th>应还日期</th><th>剩余天数</th></tr></thead>
+            <tbody>
+              <tr><td>王小明</td><td>笑傲江湖</td><td>2026-09-07</td><td><span class="tag tag-warning">2 天</span></td></tr>
+              <tr><td>李思琪</td><td>三体</td><td>2026-09-08</td><td><span class="tag tag-warning">3 天</span></td></tr>
+              <tr><td>张大山</td><td>平凡的世界</td><td>2026-09-10</td><td><span class="tag tag-info">5 天</span></td></tr>
+              <tr><td>陈小雨</td><td>白夜行</td><td>2026-09-12</td><td><span class="tag tag-info">7 天</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">最近业务</div>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>时间</th><th>操作</th><th>详情</th><th>经办人</th></tr></thead>
+            <tbody>
+              <tr><td>14:32</td><td><span class="tag tag-success">归还</span></td><td>《琅琊榜》 王小明</td><td>管理员</td></tr>
+              <tr><td>13:18</td><td><span class="tag tag-info">借阅</span></td><td>《围城》 李思琪</td><td>管理员</td></tr>
+              <tr><td>11:45</td><td><span class="tag tag-danger">逾期提醒</span></td><td>发送 5 条 AI 文案</td><td>系统</td></tr>
+              <tr><td>10:20</td><td><span class="tag tag-info">入库</span></td><td>新增 8 本图书</td><td>管理员</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="js/app.js"></script>
+<script>
+(function () {
+  // AI 推荐轮换数据
+  var recSets = [
+    [
+      { tag: '你最近喜欢 <em>悬疑</em> 类', title: '《消失的十三级台阶》', desc: '法律与人性的交织，推理严密，适合一口气读完。' },
+      { tag: '补充 <em>武侠</em> 偏好', title: '《昆仑》', desc: '凤歌新武侠扛鼎之作，融合历史与玄幻，笔法细腻。' }
+    ],
+    [
+      { tag: '根据 <em>科幻</em> 借阅记录', title: '《球状闪电》', desc: '刘慈欣早期杰作，量子力学的浪漫想象，三体前传。' },
+      { tag: '为你拓展 <em>历史</em> 视野', title: '《长安的荔枝》', desc: '马伯庸新作，小人物视角看大唐官场，一骑红尘妃子笑。' }
+    ],
+    [
+      { tag: '延续你对 <em>社会派</em> 的兴趣', title: '《空洞的十字》', desc: '紫金陈审判之作，正义或许迟到但不会缺席。' },
+      { tag: '轻松一下，试试 <em>言情</em>', title: '《云边有个小卖部》', desc: '张嘉佳温情之作，写给离开我们的人与陪伴我们的人。' }
+    ]
+  ];
+  var recIndex = 0;
+
+  function renderRecs() {
+    var set = recSets[recIndex % recSets.length];
+    var html = '';
+    set.forEach(function (r, i) {
+      if (i > 0) html += '<div style="height:1px; background:rgba(255,255,255,0.1); margin:14px 0;"></div>';
+      html +=
+        '<div style="margin-bottom:12px;">' +
+        '  <div style="color:#d4b47a; font-weight:600;">' + r.tag + '</div>' +
+        '  <div style="opacity:0.85; margin-top:4px;">试试 <strong>' + r.title + '</strong> —— ' + r.desc + '</div>' +
+        '</div>';
+    });
+    document.getElementById('recList').innerHTML = html;
+  }
+
+  renderRecs();
+
+  document.getElementById('btnMoreRecs').addEventListener('click', function () {
+    recIndex++;
+    renderRecs();
+    showToast('已为你换一批 AI 推荐', 'info');
+  });
+})();
+</script>
+</body>
+</html>

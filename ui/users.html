@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户管理 · 墨香斋小说租赁</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="brand"><span class="logo-icon">📚</span><div class="brand-name">墨香斋</div><div class="brand-sub">小说租赁系统</div></div>
+    <nav>
+      <div class="nav-group-title">工作台</div>
+      <a href="index.html" class="nav-link"><span class="icon">🏠</span><span>仪表盘</span></a>
+      <a href="books.html" class="nav-link"><span class="icon">📖</span><span>图书管理</span></a>
+      <a href="borrow-new.html" class="nav-link"><span class="icon">➕</span><span>办理借阅</span></a>
+      <a href="return-new.html" class="nav-link"><span class="icon">↩️</span><span>办理归还</span></a>
+      <div class="nav-group-title">记录</div>
+      <a href="borrows.html" class="nav-link"><span class="icon">📋</span><span>借阅记录</span></a>
+      <a href="overdue.html" class="nav-link"><span class="icon">⚠️</span><span>逾期管理</span></a>
+      <div class="nav-group-title">系统</div>
+      <a href="users.html" class="nav-link active"><span class="icon">👥</span><span>用户管理</span></a>
+      <a href="profile.html" class="nav-link"><span class="icon">👤</span><span>个人中心</span></a>
+    </nav>
+    <div class="user-info"><div class="avatar">墨</div><div class="who"><span>墨守成规</span><small>系统管理员</small></div></div>
+  </aside>
+
+  <div class="main">
+    <header class="header">
+      <div class="breadcrumb"><span>首页</span><span class="sep">/</span><strong>用户管理</strong></div>
+      <div class="header-actions"><button class="btn btn-gold">➕ 新增用户</button></div>
+    </header>
+
+    <main class="content">
+      <div class="search-bar">
+        <input class="form-control" id="searchInput" placeholder="搜索用户名、电话或邮箱...">
+        <select class="form-control" id="roleFilter" style="min-width:130px;">
+          <option value="">全部角色</option><option value="普通用户">普通用户</option><option value="管理员">管理员</option>
+        </select>
+        <select class="form-control" id="stateFilter" style="min-width:130px;">
+          <option value="">全部状态</option><option value="正常">正常</option><option value="已冻结">已冻结</option>
+        </select>
+        <button class="btn btn-secondary" id="btnSearch">搜索</button>
+      </div>
+
+      <div class="card" style="padding:0; overflow:hidden;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th><th>用户名</th><th>电话</th><th>邮箱</th><th>角色</th><th>状态</th><th>注册时间</th><th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="usersBody">
+            <tr>
+              <td>1</td><td><strong>墨守成规</strong></td><td>138****0001</td><td>admin@moxiang.com</td>
+              <td><span class="tag tag-info">系统管理员</span></td>
+              <td><span class="tag tag-success">正常</span></td>
+              <td>2025-12-01</td>
+              <td><a href="#" class="btn-ghost btn-sm act-edit">编辑</a></td>
+            </tr>
+            <tr>
+              <td>2</td><td>王小明</td><td>139****2345</td><td>wangxm@qq.com</td>
+              <td><span class="tag tag-muted">普通用户</span></td>
+              <td><span class="tag tag-success">正常</span></td>
+              <td>2026-01-15</td>
+              <td>
+                <a href="users/detail.html" class="btn-ghost btn-sm act-detail">详情</a>
+                <a href="#" class="btn-ghost btn-sm act-freeze">冻结</a>
+                <a href="#" class="btn-ghost btn-sm" style="color:var(--color-danger);" data-act="delete">删除</a>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td><td>李思琪</td><td>137****6789</td><td>lisiqi@163.com</td>
+              <td><span class="tag tag-muted">普通用户</span></td>
+              <td><span class="tag tag-success">正常</span></td>
+              <td>2026-02-20</td>
+              <td>
+                <a href="#" class="btn-ghost btn-sm act-detail">详情</a>
+                <a href="#" class="btn-ghost btn-sm act-freeze">冻结</a>
+                <a href="#" class="btn-ghost btn-sm" style="color:var(--color-danger);" data-act="delete">删除</a>
+              </td>
+            </tr>
+            <tr>
+              <td>4</td><td>张大山</td><td>136****1111</td><td>zhangds@qq.com</td>
+              <td><span class="tag tag-muted">普通用户</span></td>
+              <td><span class="tag tag-warning">已冻结</span></td>
+              <td>2026-03-05</td>
+              <td>
+                <a href="#" class="btn-ghost btn-sm act-detail">详情</a>
+                <a href="#" class="btn-ghost btn-sm act-freeze">解冻</a>
+                <a href="#" class="btn-ghost btn-sm" style="color:var(--color-danger);" data-act="delete">删除</a>
+              </td>
+            </tr>
+            <tr>
+              <td>5</td><td>陈小雨</td><td>135****2222</td><td>chenxy@gmail.com</td>
+              <td><span class="tag tag-muted">普通用户</span></td>
+              <td><span class="tag tag-success">正常</span></td>
+              <td>2026-04-18</td>
+              <td>
+                <a href="#" class="btn-ghost btn-sm act-detail">详情</a>
+                <a href="#" class="btn-ghost btn-sm act-freeze">冻结</a>
+                <a href="#" class="btn-ghost btn-sm" style="color:var(--color-danger);" data-act="delete">删除</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="empty" id="emptyTip" style="display:none;">
+          <div class="empty-icon">🔍</div><div class="empty-text">没有符合条件的用户</div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:center; gap:6px; margin-top:20px;">
+        <button class="btn btn-secondary btn-sm" disabled>上一页</button>
+        <button class="btn btn-gold btn-sm">1</button>
+        <button class="btn btn-secondary btn-sm">2</button>
+        <button class="btn btn-secondary btn-sm">下一页</button>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- 新增用户弹窗 -->
+<div class="modal-mask" id="addUserModal">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">➕ 新增用户</span>
+      <button class="modal-close" id="modalClose">×</button>
+    </div>
+    <div class="modal-body" id="addUserForm">
+      <div class="form-group">
+        <label>用户名<span class="req">*</span></label>
+        <input class="form-control" id="nuName" placeholder="3-50 个字符">
+        <div class="error-msg"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>联系电话</label>
+          <input class="form-control" id="nuPhone" placeholder="选填">
+          <div class="error-msg"></div>
+        </div>
+        <div class="form-group">
+          <label>电子邮箱</label>
+          <input class="form-control" id="nuEmail" placeholder="选填">
+          <div class="error-msg"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>角色</label>
+        <select class="form-control" id="nuRole">
+          <option value="普通用户">普通用户</option>
+          <option value="管理员">管理员</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" id="modalCancel">取消</button>
+      <button class="btn btn-gold" id="btnCreateUser">创建</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+(function () {
+  var searchInput = document.getElementById('searchInput');
+  var roleFilter = document.getElementById('roleFilter');
+  var stateFilter = document.getElementById('stateFilter');
+  var body = document.getElementById('usersBody');
+  var emptyTip = document.getElementById('emptyTip');
+  var modal = document.getElementById('addUserModal');
+
+  /* ---- 搜索与筛选 ---- */
+  function applyFilter() {
+    var kw = searchInput.value.trim().toLowerCase();
+    var role = roleFilter.value;
+    var st = stateFilter.value;
+    var visible = 0;
+
+    body.querySelectorAll('tr').forEach(function (row) {
+      var text = row.textContent.toLowerCase();
+      var rowRole = row.children[4].textContent;
+      var rowState = row.children[5].textContent;
+      var show = (!kw || text.indexOf(kw) !== -1)
+        && (!role || rowRole.indexOf(role) !== -1)
+        && (!st || rowState.indexOf(st) !== -1);
+      row.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    emptyTip.style.display = visible === 0 ? '' : 'none';
+  }
+  searchInput.addEventListener('input', applyFilter);
+  roleFilter.addEventListener('change', applyFilter);
+  stateFilter.addEventListener('change', applyFilter);
+  document.getElementById('btnSearch').addEventListener('click', applyFilter);
+
+  /* ---- 新增用户 ---- */
+  function openModal() { modal.classList.add('show'); document.getElementById('nuName').focus(); }
+  function closeModal() {
+    modal.classList.remove('show');
+    document.getElementById('nuName').value = '';
+    document.getElementById('nuPhone').value = '';
+    document.getElementById('nuEmail').value = '';
+    clearAllErrors(modal);
+  }
+  document.querySelector('.header-actions .btn-gold').addEventListener('click', openModal);
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalCancel').addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+
+  var nextId = 6;
+  document.getElementById('btnCreateUser').addEventListener('click', function () {
+    var nameEl = document.getElementById('nuName');
+    var phoneEl = document.getElementById('nuPhone');
+    var emailEl = document.getElementById('nuEmail');
+    clearAllErrors(modal);
+    var ok = true;
+
+    var name = nameEl.value.trim();
+    if (!name) { setFieldError(nameEl, '请输入用户名'); ok = false; }
+    else if (name.length < 3 || name.length > 50) { setFieldError(nameEl, '用户名需 3-50 个字符'); ok = false; }
+
+    var p = phoneEl.value.trim();
+    if (p && !/^1[3-9]\d{9}$/.test(p)) { setFieldError(phoneEl, '手机号格式不正确'); ok = false; }
+
+    var m = emailEl.value.trim();
+    if (m && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) { setFieldError(emailEl, '邮箱格式不正确'); ok = false; }
+
+    if (!ok) return;
+
+    var role = document.getElementById('nuRole').value;
+    var roleTag = role === '管理员'
+      ? '<span class="tag tag-info">系统管理员</span>'
+      : '<span class="tag tag-muted">普通用户</span>';
+    var today = new Date().toISOString().slice(0, 10);
+
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + nextId + '</td>' +
+      '<td><strong>' + name.replace(/</g, '&lt;') + '</strong></td>' +
+      '<td>' + (p ? p.slice(0, 3) + '****' + p.slice(-4) : '—') + '</td>' +
+      '<td>' + (m ? m.replace(/</g, '&lt;') : '—') + '</td>' +
+      '<td>' + roleTag + '</td>' +
+      '<td><span class="tag tag-success">正常</span></td>' +
+      '<td>' + today + '</td>' +
+      '<td>' +
+      '  <a href="#" class="btn-ghost btn-sm act-detail">详情</a>' +
+      '  <a href="#" class="btn-ghost btn-sm act-freeze">冻结</a>' +
+      '  <a href="#" class="btn-ghost btn-sm" style="color:var(--color-danger);" data-act="delete">删除</a>' +
+      '</td>';
+    body.appendChild(tr);
+    nextId++;
+    closeModal();
+    showToast('用户「' + name + '」创建成功', 'success');
+  });
+
+  /* ---- 冻结/解冻 + 删除（事件委托） ---- */
+  body.addEventListener('click', function (e) {
+    var target = e.target;
+    if (target.tagName !== 'A') return;
+
+    // 真实的详情链接（有具体 href）放行
+    if (target.classList.contains('act-detail') && target.getAttribute('href') !== '#') return;
+
+    e.preventDefault();
+
+    var row = target.closest('tr');
+    var name = row.children[1].textContent.trim();
+
+    if (target.dataset.act === 'delete') {
+      confirmDialog('确定删除用户「' + name + '」？<br><span style="font-size:12px;color:var(--text-muted);">该操作在演示环境不可撤销</span>', function () {
+        row.remove();
+        showToast('用户「' + name + '」已删除', 'info');
+        applyFilter();
+      });
+      return;
+    }
+
+    if (target.classList.contains('act-freeze')) {
+      var stateTag = row.children[5].querySelector('.tag');
+      var frozen = stateTag.classList.contains('tag-warning');
+      if (frozen) {
+        stateTag.className = 'tag tag-success';
+        stateTag.textContent = '正常';
+        target.textContent = '冻结';
+        showToast('用户「' + name + '」已解冻', 'success');
+      } else {
+        stateTag.className = 'tag tag-warning';
+        stateTag.textContent = '已冻结';
+        target.textContent = '解冻';
+        showToast('用户「' + name + '」已冻结', 'info');
+      }
+      applyFilter();
+      return;
+    }
+
+    if (target.classList.contains('act-edit')) {
+      showToast('演示环境：编辑功能需接入后端', 'info');
+      return;
+    }
+
+    if (target.classList.contains('act-detail')) {
+      showToast('演示环境：该用户暂无详情页', 'info');
+    }
+  });
+
+  /* ---- 分页（演示提示） ---- */
+  document.querySelectorAll('.btn-sm').forEach(function (btn) {
+    if (btn.tagName === 'BUTTON' && !btn.disabled) {
+      btn.addEventListener('click', function () {
+        if (btn.textContent !== '1') showToast('演示环境：分页需接入后端数据', 'info');
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>

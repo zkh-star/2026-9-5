@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图书管理 · 墨香斋小说租赁</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="brand"><span class="logo-icon">📚</span><div class="brand-name">墨香斋</div><div class="brand-sub">小说租赁系统</div></div>
+    <nav>
+      <div class="nav-group-title">工作台</div>
+      <a href="index.html" class="nav-link"><span class="icon">🏠</span><span>仪表盘</span></a>
+      <a href="books.html" class="nav-link active"><span class="icon">📖</span><span>图书管理</span></a>
+      <a href="borrow-new.html" class="nav-link"><span class="icon">➕</span><span>办理借阅</span></a>
+      <a href="return-new.html" class="nav-link"><span class="icon">↩️</span><span>办理归还</span></a>
+      <div class="nav-group-title">记录</div>
+      <a href="borrows.html" class="nav-link"><span class="icon">📋</span><span>借阅记录</span></a>
+      <a href="overdue.html" class="nav-link"><span class="icon">⚠️</span><span>逾期管理</span></a>
+      <div class="nav-group-title">系统</div>
+      <a href="users.html" class="nav-link"><span class="icon">👥</span><span>用户管理</span></a>
+      <a href="profile.html" class="nav-link"><span class="icon">👤</span><span>个人中心</span></a>
+    </nav>
+    <div class="user-info"><div class="avatar">墨</div><div class="who"><span>墨守成规</span><small>系统管理员</small></div></div>
+  </aside>
+
+  <div class="main">
+    <header class="header">
+      <div class="breadcrumb"><span>首页</span><span class="sep">/</span><strong>图书管理</strong></div>
+      <div class="header-actions">
+        <a href="book-new.html" class="btn btn-gold">➕ 录入新图书</a>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="search-bar">
+        <input class="form-control" id="searchInput" placeholder="搜索书名、作者、ISBN 或分类...">
+        <select class="form-control" id="catFilter" style="min-width:130px;">
+          <option value="">全部分类</option>
+          <option value="cat-wuxia">武侠</option>
+          <option value="cat-yanqing">言情</option>
+          <option value="cat-kehuan">科幻</option>
+          <option value="cat-xuanyi">悬疑</option>
+          <option value="cat-lishi">历史</option>
+        </select>
+        <select class="form-control" id="statusFilter" style="min-width:130px;">
+          <option value="">全部状态</option>
+          <option value="available">在库</option>
+          <option value="borrowed">借出中</option>
+          <option value="repairing">维修中</option>
+        </select>
+        <button class="btn btn-secondary" id="btnSearch">搜索</button>
+      </div>
+
+      <div class="books-grid" id="booksGrid" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:20px;">
+        <div class="book-card">
+          <div class="book-cover cat-wuxia"><span class="bc-title">笑傲江湖</span><span class="bc-author">金庸</span></div>
+          <div class="book-info">
+            <span class="bi-status borrowed">借出中</span>
+            <div class="bi-meta"><span>¥45.00</span><span>¥0.50/天</span></div>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-cover cat-kehuan"><span class="bc-title">三体</span><span class="bc-author">刘慈欣</span></div>
+          <div class="book-info">
+            <span class="bi-status available">在库</span>
+            <div class="bi-meta"><span>¥38.00</span><span>¥0.40/天</span></div>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-cover cat-yanqing"><span class="bc-title">平凡的世界</span><span class="bc-author">路遥</span></div>
+          <div class="book-info">
+            <span class="bi-status borrowed">借出中</span>
+            <div class="bi-meta"><span>¥52.00</span><span>¥0.50/天</span></div>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-cover cat-xuanyi"><span class="bc-title">白夜行</span><span class="bc-author">东野圭吾</span></div>
+          <div class="book-info">
+            <span class="bi-status available">在库</span>
+            <div class="bi-meta"><span>¥35.00</span><span>¥0.40/天</span></div>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-cover cat-lishi"><span class="bc-title">明朝那些事儿</span><span class="bc-author">当年明月</span></div>
+          <div class="book-info">
+            <span class="bi-status available">在库</span>
+            <div class="bi-meta"><span>¥128.00</span><span>¥1.00/天</span></div>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-cover cat-wuxia"><span class="bc-title">天龙八部</span><span class="bc-author">金庸</span></div>
+          <div class="book-info">
+            <span class="bi-status repairing">维修中</span>
+            <div class="bi-meta"><span>¥48.00</span><span>¥0.50/天</span></div>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-cover cat-xuanyi"><span class="bc-title">消失的十三级台阶</span><span class="bc-author">高野和明</span></div>
+          <div class="book-info">
+            <span class="bi-status available">在库</span>
+            <div class="bi-meta"><span>¥32.00</span><span>¥0.40/天</span></div>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-cover cat-yanqing"><span class="bc-title">围城</span><span class="bc-author">钱锺书</span></div>
+          <div class="book-info">
+            <span class="bi-status borrowed">借出中</span>
+            <div class="bi-meta"><span>¥28.00</span><span>¥0.40/天</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 分页 -->
+      <div style="display:flex; justify-content:center; gap:6px; margin-top:28px;">
+        <button class="btn btn-secondary btn-sm" disabled>上一页</button>
+        <button class="btn btn-gold btn-sm">1</button>
+        <button class="btn btn-secondary btn-sm">2</button>
+        <button class="btn btn-secondary btn-sm">3</button>
+        <button class="btn btn-secondary btn-sm">下一页</button>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="js/app.js"></script>
+<script>
+(function () {
+  var searchInput = document.getElementById('searchInput');
+  var catFilter = document.getElementById('catFilter');
+  var statusFilter = document.getElementById('statusFilter');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('#booksGrid .book-card'));
+
+  // 无结果提示
+  var emptyTip = document.createElement('div');
+  emptyTip.className = 'empty';
+  emptyTip.style.display = 'none';
+  emptyTip.innerHTML = '<div class="empty-icon">🔍</div><div class="empty-text">没有找到符合条件的图书</div>';
+  document.getElementById('booksGrid').after(emptyTip);
+
+  function applyFilter() {
+    var kw = searchInput.value.trim().toLowerCase();
+    var cat = catFilter.value;
+    var st = statusFilter.value;
+    var visible = 0;
+
+    cards.forEach(function (card) {
+      var title = card.querySelector('.bc-title').textContent.toLowerCase();
+      var author = card.querySelector('.bc-author').textContent.toLowerCase();
+      var cover = card.querySelector('.book-cover');
+      var status = card.querySelector('.bi-status');
+
+      var matchKw = !kw || title.indexOf(kw) !== -1 || author.indexOf(kw) !== -1;
+      var matchCat = !cat || cover.classList.contains(cat);
+      var matchSt = !st || status.classList.contains(st);
+
+      var show = matchKw && matchCat && matchSt;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    emptyTip.style.display = visible === 0 ? '' : 'none';
+  }
+
+  searchInput.addEventListener('input', applyFilter);
+  catFilter.addEventListener('change', applyFilter);
+  statusFilter.addEventListener('change', applyFilter);
+  document.getElementById('btnSearch').addEventListener('click', applyFilter);
+
+  // 分页（演示提示）
+  document.querySelectorAll('.btn-sm').forEach(function (btn) {
+    if (btn.tagName === 'BUTTON' && !btn.disabled) {
+      btn.addEventListener('click', function () {
+        if (btn.textContent !== '1') showToast('演示环境：分页需接入后端数据', 'info');
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>

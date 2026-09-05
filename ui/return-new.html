@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>办理归还 · 墨香斋小说租赁</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="brand"><span class="logo-icon">📚</span><div class="brand-name">墨香斋</div><div class="brand-sub">小说租赁系统</div></div>
+    <nav>
+      <div class="nav-group-title">工作台</div>
+      <a href="index.html" class="nav-link"><span class="icon">🏠</span><span>仪表盘</span></a>
+      <a href="books.html" class="nav-link"><span class="icon">📖</span><span>图书管理</span></a>
+      <a href="borrow-new.html" class="nav-link"><span class="icon">➕</span><span>办理借阅</span></a>
+      <a href="return-new.html" class="nav-link active"><span class="icon">↩️</span><span>办理归还</span></a>
+      <div class="nav-group-title">记录</div>
+      <a href="borrows.html" class="nav-link"><span class="icon">📋</span><span>借阅记录</span></a>
+      <a href="overdue.html" class="nav-link"><span class="icon">⚠️</span><span>逾期管理</span></a>
+      <div class="nav-group-title">系统</div>
+      <a href="users.html" class="nav-link"><span class="icon">👥</span><span>用户管理</span></a>
+      <a href="profile.html" class="nav-link"><span class="icon">👤</span><span>个人中心</span></a>
+    </nav>
+    <div class="user-info"><div class="avatar">墨</div><div class="who"><span>墨守成规</span><small>系统管理员</small></div></div>
+  </aside>
+
+  <div class="main">
+    <header class="header">
+      <div class="breadcrumb"><span>首页</span><span class="sep">/</span><strong>办理归还</strong></div>
+    </header>
+
+    <main class="content">
+      <!-- 第一步：借阅查询 -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">第一步：查询借阅</div></div>
+        <div style="display:flex; gap:12px; max-width:500px;">
+          <input class="form-control" id="queryInput" placeholder="输入借阅单号或扫描图书 ISBN...">
+          <button class="btn" id="btnQuery">查询</button>
+        </div>
+        <div class="error-msg" id="queryError" style="margin-top:8px;">请输入借阅单号</div>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:8px;">演示：输入任意单号（如 #B-2026-0831）即可查出示例借阅</div>
+
+        <!-- 借阅信息展示（查询成功后显示） -->
+        <div id="borrowInfo" style="display:none; margin-top:24px; padding:18px; background:var(--color-paper); border-radius:var(--radius-sm); border:1px solid var(--border);">
+          <div style="display:flex; gap:24px;">
+            <div class="book-cover cat-wuxia" style="width:100px; height:140px; flex-shrink:0;"><span class="bc-title" style="font-size:13px;">笑傲江湖</span><span class="bc-author" style="font-size:10px;">金庸</span></div>
+            <div style="flex:1;">
+              <div style="display:flex; gap:20px; font-size:13px; color:var(--text-secondary);">
+                <div><strong style="color:var(--text-primary); font-size:15px;">王小明</strong></div>
+                <div>借阅单号 <strong style="color:var(--text-primary);">#B-2026-0831</strong></div>
+                <div>状态 <span class="tag tag-warning">逾期中</span></div>
+              </div>
+              <div style="margin-top:12px; font-size:13px; color:var(--text-secondary);">
+                <div>借出日期：2026-08-31 &nbsp;|&nbsp; 应还日期：2026-09-04 &nbsp;|&nbsp; <span style="color:var(--color-danger); font-weight:bold;">已逾期 1 天</span></div>
+                <div style="margin-top:6px;">日租金 ¥0.50 &nbsp;|&nbsp; 定价 ¥45.00 &nbsp;|&nbsp; 押金 ¥30.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第二步：损坏检查 -->
+      <div class="card" id="stepDamage" style="display:none;">
+        <div class="card-header"><div class="card-title">第二步：损坏检查</div></div>
+        <div class="form-group">
+          <label>图书状况<span class="req">*</span></label>
+          <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:10px;">
+            <label style="cursor:pointer;" class="damage-card">
+              <input type="radio" name="damage" value="0" data-label="完好" checked style="display:none;">
+              <div style="padding:14px; border:2px solid var(--color-success); border-radius:var(--radius-sm); text-align:center; font-size:13px;">
+                <div style="font-size:24px; margin-bottom:4px;">👌</div>
+                <div><strong>完好</strong></div>
+                <div style="color:var(--text-muted); font-size:11px; margin-top:2px;">赔偿 0%</div>
+              </div>
+            </label>
+            <label style="cursor:pointer;" class="damage-card">
+              <input type="radio" name="damage" value="0.1" data-label="轻微" style="display:none;">
+              <div style="padding:14px; border:2px solid var(--border); border-radius:var(--radius-sm); text-align:center; font-size:13px;">
+                <div style="font-size:24px; margin-bottom:4px;">📄</div>
+                <div><strong>轻微</strong></div>
+                <div style="color:var(--text-muted); font-size:11px; margin-top:2px;">折角污渍 10%</div>
+              </div>
+            </label>
+            <label style="cursor:pointer;" class="damage-card">
+              <input type="radio" name="damage" value="0.3" data-label="中度" style="display:none;">
+              <div style="padding:14px; border:2px solid var(--border); border-radius:var(--radius-sm); text-align:center; font-size:13px;">
+                <div style="font-size:24px; margin-bottom:4px;">💧</div>
+                <div><strong>中度</strong></div>
+                <div style="color:var(--text-muted); font-size:11px; margin-top:2px;">撕裂水渍 30%</div>
+              </div>
+            </label>
+            <label style="cursor:pointer;" class="damage-card">
+              <input type="radio" name="damage" value="1" data-label="严重" style="display:none;">
+              <div style="padding:14px; border:2px solid var(--border); border-radius:var(--radius-sm); text-align:center; font-size:13px;">
+                <div style="font-size:24px; margin-bottom:4px;">💔</div>
+                <div><strong>严重</strong></div>
+                <div style="color:var(--text-muted); font-size:11px; margin-top:2px;">缺页破损 100%</div>
+              </div>
+            </label>
+            <label style="cursor:pointer;" class="damage-card">
+              <input type="radio" name="damage" value="1.5" data-label="丢失" style="display:none;">
+              <div style="padding:14px; border:2px solid var(--border); border-radius:var(--radius-sm); text-align:center; font-size:13px;">
+                <div style="font-size:24px; margin-bottom:4px;">❓</div>
+                <div><strong>丢失</strong></div>
+                <div style="color:var(--text-muted); font-size:11px; margin-top:2px;">定价 150%</div>
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>损坏描述（可选）</label>
+          <textarea class="form-control" id="damageDesc" placeholder="如有损坏请简单描述..."></textarea>
+        </div>
+      </div>
+
+      <!-- 第三步：费用结算 -->
+      <div class="card" id="stepSettle" style="display:none;">
+        <div class="card-header"><div class="card-title">第三步：费用结算</div></div>
+        <div class="summary-box">
+          <div class="summary-row overdue"><span>逾期费用（1 天 × ¥0.50 × 1.5）</span><span class="amount">¥ 0.75</span></div>
+          <div class="summary-row damage"><span id="damageLabel">损坏赔偿（完好）</span><span class="amount" id="damageFee">¥ 0.00</span></div>
+          <div class="summary-row"><span style="font-weight:600;">费用合计</span><span class="amount" style="color:var(--color-danger); font-weight:bold;" id="totalFee">¥ 0.75</span></div>
+          <div class="summary-row"><span>押金</span><span class="amount">¥ 30.00</span></div>
+          <div class="summary-row total"><span id="refundLabel">应退押金</span><span class="amount" style="color:var(--color-success);" id="refundFee">¥ 29.25</span></div>
+        </div>
+        <div style="display:flex; gap:12px; margin-top:20px;">
+          <button class="btn btn-gold btn-lg" id="btnConfirmReturn">✅ 确认归还</button>
+          <button class="btn btn-secondary btn-lg" id="btnCancelReturn">取消</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="js/app.js"></script>
+<script>
+(function () {
+  var queryInput = document.getElementById('queryInput');
+  var queryError = document.getElementById('queryError');
+  var BOOK_PRICE = 45.00;
+  var DEPOSIT = 30.00;
+
+  // ---- 第一步：查询 ----
+  document.getElementById('btnQuery').addEventListener('click', function () {
+    var q = queryInput.value.trim();
+    if (!q) {
+      queryError.style.display = 'block';
+      queryInput.style.borderColor = 'var(--color-danger)';
+      queryInput.focus();
+      return;
+    }
+    queryError.style.display = 'none';
+    queryInput.style.borderColor = '';
+
+    document.getElementById('borrowInfo').style.display = '';
+    document.getElementById('stepDamage').style.display = '';
+    document.getElementById('stepSettle').style.display = '';
+    showToast('已查到借阅记录：#B-2026-0831', 'success');
+  });
+
+  queryInput.addEventListener('input', function () {
+    queryError.style.display = 'none';
+    queryInput.style.borderColor = '';
+  });
+  queryInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') document.getElementById('btnQuery').click();
+  });
+
+  // ---- 第二步：损坏等级选择（卡片高亮 + 费用重算） ----
+  function selectedDamage() {
+    var r = document.querySelector('input[name="damage"]:checked');
+    return { rate: parseFloat(r.value), label: r.dataset.label };
+  }
+
+  function recalc() {
+    var d = selectedDamage();
+    var overdue = 0.75; // 1 天 × ¥0.50 × 1.5
+    var damage = Math.round(BOOK_PRICE * d.rate * 100) / 100;
+    var total = Math.round((overdue + damage) * 100) / 100;
+    var refund = Math.round((DEPOSIT - total) * 100) / 100;
+
+    document.getElementById('damageLabel').textContent = '损坏赔偿（' + d.label + '）';
+    document.getElementById('damageFee').textContent = '¥ ' + damage.toFixed(2);
+    document.getElementById('totalFee').textContent = '¥ ' + total.toFixed(2);
+
+    if (refund >= 0) {
+      document.getElementById('refundLabel').textContent = '应退押金';
+      document.getElementById('refundFee').textContent = '¥ ' + refund.toFixed(2);
+      document.getElementById('refundFee').style.color = 'var(--color-success)';
+    } else {
+      document.getElementById('refundLabel').textContent = '押金不足，需补缴';
+      document.getElementById('refundFee').textContent = '¥ ' + Math.abs(refund).toFixed(2);
+      document.getElementById('refundFee').style.color = 'var(--color-danger)';
+    }
+  }
+
+  // 卡片选中高亮
+  function highlight() {
+    document.querySelectorAll('.damage-card').forEach(function (label) {
+      var radio = label.querySelector('input');
+      var box = label.querySelector('div');
+      box.style.borderColor = radio.checked ? 'var(--color-primary)' : 'var(--border)';
+      box.style.borderWidth = radio.checked ? '2px' : '2px';
+    });
+  }
+
+  document.querySelectorAll('input[name="damage"]').forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      highlight();
+      recalc();
+    });
+  });
+
+  // ---- 第三步：确认归还 ----
+  document.getElementById('btnConfirmReturn').addEventListener('click', function () {
+    var d = selectedDamage();
+    var msg = '确认归还《笑傲江湖》？';
+    if (d.rate > 0) msg += '<br>损坏等级：<strong>' + d.label + '</strong>，将收取赔偿费用。';
+    confirmDialog(msg, function () {
+      showToast('归还完成！押金结算成功', 'success');
+      setTimeout(function () { location.href = 'borrows.html'; }, 900);
+    });
+  });
+
+  document.getElementById('btnCancelReturn').addEventListener('click', function () {
+    document.getElementById('borrowInfo').style.display = 'none';
+    document.getElementById('stepDamage').style.display = 'none';
+    document.getElementById('stepSettle').style.display = 'none';
+    queryInput.value = '';
+    document.querySelector('input[name="damage"][value="0"]').checked = true;
+    highlight();
+    recalc();
+    showToast('已取消本次归还', 'info');
+  });
+})();
+</script>
+</body>
+</html>
